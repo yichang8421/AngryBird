@@ -465,18 +465,6 @@ export const string = `
         border-right: 6px solid var(--black);
         border-top: 6px solid var(--black);
     }
-    .crest:after {
-        width: 81px;
-        height: 34px;
-        left: -15px;
-        top: -44px;
-    }
-    .crest:before {
-        width: 95px;
-        height: 27px;
-        left: -50px;
-        top: -20px;
-    }
     .hide-chest-lines {
         width: 52px;
         height: 27px;
@@ -488,6 +476,18 @@ export const string = `
         height: 30px;
         top: -24px;
         left: 24px;
+    }
+    .crest:after {
+        width: 81px;
+        height: 34px;
+        left: -15px;
+        top: -44px;
+    }
+    .crest:before {
+        width: 95px;
+        height: 27px;
+        left: -50px;
+        top: -20px;
     }
     .head {
         width: 252px;
