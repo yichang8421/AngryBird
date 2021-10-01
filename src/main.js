@@ -1,72 +1,92 @@
 import {string} from "./css.js"
 
-let n = 1;
-window.htmlStyle.innerHTML = string.substr(0, n);
-window.text.innerText = string.substr(0, n);
+const player = {
+    n: 1,
+    id: undefined,
+    speedCase: 1,
+    time: 100,
+    ui: {
+        htmlStyle: document.getElementById("htmlStyle"),
+        text: document.getElementById("text"),
+        speedStatus: document.getElementById("speedStatus")
+    },
 
-let speedCase = 1, time = 100;
+    init: () => {
+        player.ui.htmlStyle.innerHTML = string.substr(0, player.n);
+        player.ui.text.innerText = string.substr(0, player.n);
+        player.id = setInterval(player.run, player.time);
+        player.bindEvents();
+    },
 
-const play = () => {
-    if (!id) {
-        id = setInterval(run, time);
-    }
-};
+    events: {
+        "#btnPause": "pause",
+        "#btnPlay": "play",
+        "#btnSpeed": "changeSpeed"
+    },
 
-const Pause = () => {
-    window.clearInterval(id)
-    id = null;
-};
+    bindEvents: () => {
+        for (let key in player.events) {
+            if (player.events.hasOwnProperty(key)) {
+                const value = player.events[key]
+                document.querySelector(key).onclick = player[value];
+            }
+        }
+    },
 
-const changeSpeed = () => {
-    speedCase += 1;
-    if (speedCase > 4) {
-        speedCase = 1
-    }
-    switch (speedCase) {
-        case 1:
-            time = 100;
-            speedStatus.innerText = "慢速";
-            break;
-        case 2:
-            time = 50;
-            speedStatus.innerText = "较慢";
-            break;
-        case 3:
-            time = 25;
-            speedStatus.innerText = "快速";
-            break;
-        case 4:
-            time = 0;
-            speedStatus.innerText = "最快";
-            break;
-        default:
-            return 0;
+    run: () => {
+        player.n += 1;
+        if (player.n > string.length) {
+            window.clearInterval(player.id)
+            return;
+        }
+        player.ui.htmlStyle.innerHTML = string.substr(0, player.n);
+        player.ui.text.innerText = string.substr(0, player.n);
+        player.ui.text.scrollTop = player.ui.text.scrollHeight;
+    },
+
+    play: () => {
+        if (!player.id) {
+            player.id = setInterval(player.run, player.time);
+        }
+    },
+
+    pause: () => {
+        window.clearInterval(player.id)
+        player.id = undefined;
+    },
+
+    selectCase: () => {
+        player.speedCase += 1;
+        if (player.speedCase > 4) {
+            player.speedCase = 1
+        }
+        switch (player.speedCase) {
+            case 1:
+                player.time = 100;
+                player.ui.speedStatus.innerText = "加速";
+                break;
+            case 2:
+                player.time = 50;
+                player.ui.speedStatus.innerText = "快速";
+                break;
+            case 3:
+                player.time = 25;
+                player.ui.speedStatus.innerText = "更快";
+                break;
+            case 4:
+                player.time = 0;
+                player.ui.speedStatus.innerText = "重置";
+                break;
+            default:
+                return 0;
+        }
+    },
+
+    changeSpeed: () => {
+        player.selectCase();
+        player.pause();
+        player.play();
     }
 }
 
-const run = () => {
-    n += 1;
-    if (n > string.length) {
-        window.clearInterval(id)
-        return;
-    }
-    window.htmlStyle.innerHTML = string.substr(0, n);
-    window.text.innerText = string.substr(0, n);
-    window.text.scrollTop = window.text.scrollHeight;
-}
-
-let id = setInterval(run, time);
-
-btnPause.onclick = () => {
-    Pause();
-};
-
-btnPlay.onclick = () => {
-    play();
-};
-
-btnSpeed.onclick = () => {
-    changeSpeed();
-    Pause();
-    play();
-}
+player.init();
