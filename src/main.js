@@ -4,7 +4,9 @@ let n = 1;
 window.htmlStyle.innerHTML = string.substr(0, n);
 window.text.innerText = string.substr(0, n);
 
-const x = () => {
+let speedCase = 1, time = 80
+
+const run = () => {
     n += 1;
     if (n > string.length) {
         window.clearInterval(id)
@@ -16,9 +18,7 @@ const x = () => {
     window.text.scrollTop = window.text.scrollHeight;
 }
 
-let id = setInterval(() => {
-    x();
-}, 0);
+let id = setInterval(run, time);
 
 btnPause.onclick = () => {
     window.clearInterval(id)
@@ -27,8 +27,30 @@ btnPause.onclick = () => {
 
 btnPlay.onclick = () => {
     if (!id) {
-        id = setInterval(() => {
-            x();
-        }, 0);
+        id = setInterval(run, time);
     }
+};
+
+
+btnSpeed.onclick = () => {
+    speedCase += 1;
+    if (speedCase > 3) {
+        speedCase = 1
+    }
+    switch (speedCase) {
+        case 1:
+            time = 50;
+            break
+        case 2:
+            time = 30;
+            break
+        case 3:
+            time = 0;
+            break
+        default:
+            return 0;
+    }
+    window.clearInterval(id)
+    id = null;
+    id = setInterval(run, time);
 }
