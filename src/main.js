@@ -4,7 +4,41 @@ let n = 1;
 window.htmlStyle.innerHTML = string.substr(0, n);
 window.text.innerText = string.substr(0, n);
 
-let speedCase = 1, time = 80
+let speedCase = 1, time = 100;
+
+const play = () => {
+    if (!id) {
+        id = setInterval(run, time);
+    }
+};
+
+const Pause = () => {
+    window.clearInterval(id)
+    id = null;
+};
+
+const changeSpeed = () => {
+    speedCase += 1;
+    if (speedCase > 4) {
+        speedCase = 1
+    }
+    switch (speedCase) {
+        case 1:
+            time = 100;
+            break;
+        case 2:
+            time = 50;
+            break;
+        case 3:
+            time = 25;
+            break;
+        case 4:
+            time = 0;
+            break;
+        default:
+            return 0;
+    }
+}
 
 const run = () => {
     n += 1;
@@ -12,7 +46,6 @@ const run = () => {
         window.clearInterval(id)
         return;
     }
-    // console.log(n + ":" + string.substr(0, n));
     window.htmlStyle.innerHTML = string.substr(0, n);
     window.text.innerText = string.substr(0, n);
     window.text.scrollTop = window.text.scrollHeight;
@@ -21,36 +54,15 @@ const run = () => {
 let id = setInterval(run, time);
 
 btnPause.onclick = () => {
-    window.clearInterval(id)
-    id = null;
+    Pause();
 };
 
 btnPlay.onclick = () => {
-    if (!id) {
-        id = setInterval(run, time);
-    }
+    play();
 };
 
-
 btnSpeed.onclick = () => {
-    speedCase += 1;
-    if (speedCase > 3) {
-        speedCase = 1
-    }
-    switch (speedCase) {
-        case 1:
-            time = 50;
-            break
-        case 2:
-            time = 30;
-            break
-        case 3:
-            time = 0;
-            break
-        default:
-            return 0;
-    }
-    window.clearInterval(id)
-    id = null;
-    id = setInterval(run, time);
+    changeSpeed();
+    Pause();
+    play();
 }
