@@ -10,7 +10,7 @@ const player = {
         text: document.getElementById("text"),
         speedStatus: document.getElementById("speedStatus")
     },
-
+    viewText: "",
     init: () => {
         player.ui.htmlStyle.innerHTML = string.substr(0, player.n);
         player.ui.text.innerText = string.substr(0, player.n);
@@ -34,13 +34,21 @@ const player = {
     },
 
     run: () => {
+        if (string[player.n] === "\n") {
+            player.viewText += '<br>';
+        } else if (string[player.n] === " ") {
+            player.viewText += "&nbsp;";
+        } else {
+            player.viewText += string[player.n];
+        }
         player.n += 1;
         if (player.n > string.length) {
             window.clearInterval(player.id)
             return;
         }
+
         player.ui.htmlStyle.innerHTML = string.substr(0, player.n);
-        player.ui.text.innerText = string.substr(0, player.n);
+        player.ui.text.innerHTML = player.viewText;
         player.ui.text.scrollTop = player.ui.text.scrollHeight;
     },
 
