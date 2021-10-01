@@ -25,15 +25,19 @@ const changeSpeed = () => {
     switch (speedCase) {
         case 1:
             time = 100;
+            speedStatus.innerText = "慢速";
             break;
         case 2:
             time = 50;
+            speedStatus.innerText = "较慢";
             break;
         case 3:
             time = 25;
+            speedStatus.innerText = "快速";
             break;
         case 4:
             time = 0;
+            speedStatus.innerText = "最快";
             break;
         default:
             return 0;
