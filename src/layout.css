@@ -1,0 +1,48 @@
+body {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    box-sizing: border-box;
+    height: 100vh;
+    background: #eee;
+}
+
+#text {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+#text::-webkit-scrollbar {
+    display: none;
+}
+
+#bird {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100vh;
+}
+
+#htmlStyle {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    #text {
+        top: 0;
+        width: 100vw;
+        height: 50vh;
+    }
+
+    #bird {
+        top: 50vh;
+        left: 0;
+        width: 100%;
+        height: 50vh;
+    }
+}
