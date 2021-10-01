@@ -332,11 +332,7 @@ export const string = `
     transform: rotate(39deg);
 }
 
-@media (max-width: 700px) {
-    .head {
-        width: 252px;
-        height: 243px;
-    }
+@media (max-width: 960px) {
     .eyebrow {
         width: 16px;
         border-top: 78px solid var(--black);
@@ -492,6 +488,10 @@ export const string = `
         height: 30px;
         top: -24px;
         left: 24px;
+    }
+    .head {
+        width: 252px;
+        height: 243px;
     }
 }
 
