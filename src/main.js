@@ -3,7 +3,7 @@ import {string} from "./css.js"
 const player = {
     n: 1,
     id: undefined,
-    speedCase: 1,
+    speedCase: 2,
     time: 100,
     ui: {
         htmlStyle: document.getElementById("htmlStyle"),
@@ -71,19 +71,19 @@ const player = {
         switch (player.speedCase) {
             case 1:
                 player.time = 100;
-                player.ui.speedStatus.innerText = "加速";
+                player.ui.speedStatus.innerText = "0.5×";
                 break;
             case 2:
                 player.time = 50;
-                player.ui.speedStatus.innerText = "快速";
+                player.ui.speedStatus.innerText = "1.0×";
                 break;
             case 3:
                 player.time = 25;
-                player.ui.speedStatus.innerText = "更快";
+                player.ui.speedStatus.innerText = "1.5×";
                 break;
             case 4:
                 player.time = 0;
-                player.ui.speedStatus.innerText = "重置";
+                player.ui.speedStatus.innerText = "2.0×";
                 break;
             default:
                 return 0;
